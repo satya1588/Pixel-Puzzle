@@ -1,11 +1,9 @@
 $(document).ready(function() {
-	
 	$('#imageSelection').children('li').bind('click', function(e) {
 	    $('#imageTextfield').val($(this).children('a').children('img').attr('src'));
 	});
 	
 	$('.loadChooseUI').click(function(){
-		
 		ImagePuzzle_Utils.loadChooseUI();
 		$('#gameContainer').attr('style', 'display:none');
 		$('#chooseContainer').attr('style', 'display:inline');
@@ -14,92 +12,29 @@ $(document).ready(function() {
 	});
 	
 	document.getElementById('submit').addEventListener('click', function(event) {
-		
 		ImagePuzzle_Game.init();
-		
 	}, false);
 	
 	document.getElementById('restartButton').addEventListener('click', function(event) {
-		
 		ImagePuzzle_Utils.loadChooseUI();
 		$('#gameContainer').attr('style', 'display:none');
 		$('#chooseContainer').attr('style', 'display:inline');
 		$('#moveCount').html('0');
-		
 	}, false);
 	
 	document.getElementById('help').addEventListener('click', function(event) {
-		
 		window.open('https://github.com/justc0de/imagepuzzle/wiki/How-to-play');
-		
 	}, false);
 	
-	$('#gameContent').on('click', '#grid td', function(e) {
-		
-		ImagePuzzle_Game.idCounter = 0,
-			ImagePuzzle_Game.score = 0;
-		
-		var empty = $("#blankCell").get(0);
-		if (!empty || this == empty) return; // abort, abort!
+	$('#imageInput').on('change', function(e) {
+	    var file = e.target.files[0];
+	    var reader = new FileReader();
 	
-	    var currow = this.parentNode,
-	        emptyrow = empty.parentNode;
-	    var cx = this.cellIndex,
-	        cy = currow.rowIndex,
-	        ex = empty.cellIndex,
-	        ey = emptyrow.rowIndex;
-	    if (cx==ex && Math.abs(cy-ey)==1 || cy==ey && Math.abs(cx-ex)==1) {
-	        // empty and this are next to each other in the grid
-	        var afterempty = empty.nextSibling,
-	            afterthis = this.nextSibling;
-	        currow.insertBefore(empty, afterthis); 
-	        emptyrow.insertBefore(this, afterempty);
-			
-	        ImagePuzzle_Utils.noOfMoves++;
+	    reader.onload = function(event) {
+	        $('#imageTextfield').val(event.target.result);
+	    };
 	
-			//play the move sound
-			if($('#mute').val() === 'off'){
-				ImagePuzzle_Game.move_snd.play();
-			}
-	
-			ImagePuzzle_Utils.updateText('moveCount', ImagePuzzle_Utils.noOfMoves);
-	    }
-	    
-	    // Check if puzzle is complete after each move
-	    $("td").each(function() {
-	    	
-	    	if ($(this).children().attr("id") == "canvas" + ImagePuzzle_Game.idCounter){
-	    		
-	    		ImagePuzzle_Game.score++;
-	    		
-	    		
-	    		if (ImagePuzzle_Game.score == ImagePuzzle_Game.target){
-	    			
-	    			//show complete image
-					$("#blankCell").children().show();
-					$("#blankCell").attr('id', $("#blankCell").children().attr('id'));
-					
-					if($('#mute').val() === "off"){
-						ImagePuzzle_Game.win_snd.play();
-					}
-					
-					// stop timer in UI
-					clearInterval(ImagePuzzle_Game.timerIntervalId);	
-					
-					var endTime = new Date(),
-						duration = ImagePuzzle_Utils.diffBetweenTimes(
-		            		ImagePuzzle_Utils.getStartTime(), 
-		            		endTime); 
-					
-					ImagePuzzle_Utils.puzzlesSolved++;
-					ImagePuzzle_Utils.updateText('puzzlesSolved', ImagePuzzle_Utils.puzzlesSolved);
-					
-					$('#playAgainLink').click();
-	    		}
-	    	}
-	    	
-	    	ImagePuzzle_Game.idCounter++;
-		});
+	    reader.readAsDataURL(file);
 	});
 });
 
