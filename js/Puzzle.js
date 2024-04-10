@@ -1,24 +1,31 @@
 var ImagePuzzle_Game = {
-	blankRow: 0,
-	blankCol: 0,
-	idCounter: null,
-	score: null,
-	imgsrc: null,
-	rowCount: null,
-	target: null,
-	timerIntervalId: 0,
-	move_snd: new Audio("sounds/move1.wav"),
-	shuffle_snd: new Audio("sounds/shuffle1.wav"),
-	win_snd: new Audio("sounds/success1.wav"),
-	
-	init: function(){
-		ImagePuzzle_Game.imgsrc = document.getElementById('imageTextfield').value.replace("preview", "stock");
-		ImagePuzzle_Game.rowCount = $('#gridSize :radio:checked').val();
-		
-		$('#chooseContainer').attr('style', 'display:none');
-		$('#gameContainer').attr('style', 'display:inline');	
-		
-		newGame(ImagePuzzle_Game.imgsrc, ImagePuzzle_Game.rowCount);
+    blankRow: 0,
+    blankCol: 0,
+    idCounter: null,
+    score: null,
+    imgsrc: null,
+    rowCount: null,
+    target: null,
+    timerIntervalId: 0,
+    move_snd: new Audio("sounds/move1.wav"),
+    shuffle_snd: new Audio("sounds/shuffle1.wav"),
+    win_snd: new Audio("sounds/success1.wav"),
+    
+    init: function() {
+        var imageUrl = document.getElementById('imageTextfield').value;
+        
+        if (imageUrl.startsWith('data:')) {
+            ImagePuzzle_Game.imgsrc = imageUrl;
+        } else {
+            ImagePuzzle_Game.imgsrc = imageUrl.replace("preview", "stock");
+        }
+        
+        ImagePuzzle_Game.rowCount = $('#gridSize :radio:checked').val();
+        
+        $('#chooseContainer').attr('style', 'display:none');
+        $('#gameContainer').attr('style', 'display:inline');	
+        
+        newGame(ImagePuzzle_Game.imgsrc, ImagePuzzle_Game.rowCount);
 
 		function newGame(imgsrc, rowCount){
 			ImagePuzzle_ImageActions.loadImage(imgsrc, function(loadedImage){
