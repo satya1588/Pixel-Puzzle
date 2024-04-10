@@ -38,7 +38,8 @@
 	            
 	            <div id="chooseContainer" style="display:none">
 	                 <h3 class="centerHorizontally">Choose an image or paste a url</h3>
-	                 
+
+					 
 					
 					<ul id="imageSelection" data-role="listview" data-inset="true">
 					    <li data-icon="false">
@@ -89,6 +90,56 @@
 					    		<h2>Pink forest</h2>
 					    	</a>
 					    </li>
+						<li data-icon="false">
+					    	<a href="#">
+					        	<img src="images/preview/wolf.jpg" />
+					    		<h2>Wolf</h2>
+					    	</a>
+					    </li>
+						<li data-icon="false">
+					    	<a href="#">
+					        	<img src="images/preview/2409.jpg" />
+					    		<h2>London</h2>
+					    	</a>
+					    </li>
+						<li data-icon="false">
+					    	<a href="#">
+					        	<img src="images/preview/walkin.jpg" />
+					    		<h2>Bull</h2>
+					    	</a>
+					    </li>
+						<li data-icon="false">
+					    	<a href="#">
+					        	<img src="images/preview/monarch_butterfly.jpg" />
+					    		<h2>Butterfly</h2>
+					    	</a>
+					    </li>
+						<li data-icon="false">
+					    	<a href="#">
+					        	<img src="images/preview/golden_cathedral.jpg" />
+					    		<h2>Sand Forest</h2>
+					    	</a>
+					    </li>
+						<li data-icon="false">
+					    	<a href="#">
+					        	<img src="images/preview/in_the_blue.jpg" />
+					    		<h2>Blue Whale</h2>
+					    	</a>
+					    </li>
+						<li data-icon="false">
+					    	<a href="#">
+					        	<img src="images/preview/seerose.jpg" />
+					    		<h2>Lotus</h2>
+					    	</a>
+					    </li>
+						<li data-icon="false">
+					    	<a href="#">
+					        	<img src="images/preview/island-126.jpg" />
+					    		<h2>Island</h2>
+					    	</a>
+					    </li>
+						<input type="file" id="imageInput" accept="image/*" style="display: none;">
+						<button onclick="document.getElementById('imageInput').click();">Click Here ! To Choose Image From your Device To Play</button
 					</ul>
 	
 	                <div id="pieceSelection" class="centerHorizontally">
@@ -129,9 +180,9 @@
 		            </div>
 						
 		            <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-			            <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-left">
+			            <!-- <div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-btn-left">
 			               	<button id="help">Help</button>
-			            </div>
+			            </div> -->
 		                 <h1>Moves: <span id="moveCount">0</span>, Time: <span id="timer">00:00.0</span></h1>
 		            </div>
 		            
