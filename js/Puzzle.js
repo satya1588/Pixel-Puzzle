@@ -73,7 +73,7 @@ var ImagePuzzle_Game = {
 					ImagePuzzle_Game.timerIntervalId = setInterval(ImagePuzzle_Utils.initTimer, 100);
 					ImagePuzzle_Game.target = ImagePuzzle_Game.rowCount * ImagePuzzle_Game.rowCount;
 					
-					jumblePuzzle(rowCount);
+					ImagePuzzle_Game.jumblePuzzle(rowCount);
 					
 					return false;
 				});
@@ -216,25 +216,25 @@ document.addEventListener('keydown', function(event) {
 		ey = emptyrow.rowIndex;
 	
 	switch (event.keyCode) {
-		case 37:
+		case 37: // Left arrow
 			if (ex < ImagePuzzle_Game.rowCount - 1) {
 				ImagePuzzle_Game.moveEmptyCell(ex, ey, 'r');
 				ImagePuzzle_Game.updateGameState();
 			}
 			break;
-		case 38: 
+		case 38: // Up arrow
 			if (ey < ImagePuzzle_Game.rowCount - 1) {
 				ImagePuzzle_Game.moveEmptyCell(ex, ey, 'd');
 				ImagePuzzle_Game.updateGameState();
 			}
 			break;
-		case 39:
+		case 39: // Right arrow
 			if (ex > 0) {
 				ImagePuzzle_Game.moveEmptyCell(ex, ey, 'l');
 				ImagePuzzle_Game.updateGameState();
 			}
 			break;
-		case 40:
+		case 40: // Down arrow
 			if (ey > 0) {
 				ImagePuzzle_Game.moveEmptyCell(ex, ey, 'u');
 				ImagePuzzle_Game.updateGameState();
